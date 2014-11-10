@@ -20,13 +20,16 @@ class ANGLECommandLine:
 
     packagePath = "GL Shader Validator"
     platform = sublime.platform()
-    errorPattern = re.compile("ERROR: 0:(\d+): '([^\']*)' : (.*)")
+    errorPattern = re.compile("ERROR: 0:(\d+):\s?(?:'([^\']*)'\s?:)?\s?(.*)")
     permissionChecked = False
     ANGLEPath = {
         "osx": "./osx/validate_glsl",
+        #"osx": "./essl_to_glsl_osx"
         "linux": "./essl_to_glsl_linux",
         "windows": "essl_to_glsl_win.exe"
     }
+
+    #ublime.error_message("TESTING")
 
     def ensure_script_permissions(self):
         """ Ensures that we have permission to execute the command """
@@ -83,7 +86,6 @@ class ANGLECommandLine:
 
             # Go through each error, ignoring any comments
             for e in errlines:
-
                 e = e.decode("utf-8")
 
                 # Check if there was a permission denied
@@ -108,7 +110,7 @@ class ANGLECommandLine:
                         errorLocation = fileLines[errorLine]
 
                         # If there is a token try and locate it
-                        if len(errorToken) > 0:
+                        if errorToken is not None and len(errorToken) > 0:
                             betterLocation = view.find(
                                 errorToken,
                                 errorLocation.begin(),
@@ -261,7 +263,7 @@ class GLShaderValidatorCommand(sublime_plugin.EventListener):
         if self.is_valid_file_ending(view):
 
             # Clear the last set of errors
-            self.clear_errors
+            self.clear_errors(view)
 
             # ensure that the script has permissions to run
             # this only runs once and is short circuited on subsequent calls
