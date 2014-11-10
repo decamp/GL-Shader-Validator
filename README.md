@@ -1,3 +1,15 @@
+## About this fork:
+
+I made this hacky fork because I couldn't find an IDE for OS X that supported any version of GLSL beyond V1.2. My solution was to just use SublimeText and jam in a new validator binary into this here bundle.
+
+On OS X platforms, validation works for \#version 330+, depending on your system OpenGL framework. However, the only supported spec is Desktop OpenGL. GL ES, WebGL, or CSS specs will no longer work.
+
+Win/Linux platforms are the still the same, and don't support greater \#version > 100.
+
+The available toolchain for GLSL could be better.
+
+-decamp
+
 # GL Shader Validator
 
 ![image](http://aerotwist.com/glshadervalidator/screenshot.png)

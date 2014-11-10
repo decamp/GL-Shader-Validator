@@ -23,7 +23,7 @@ class ANGLECommandLine:
     errorPattern = re.compile("ERROR: 0:(\d+): '([^\']*)' : (.*)")
     permissionChecked = False
     ANGLEPath = {
-        "osx": "./essl_to_glsl_osx",
+        "osx": "./osx/validate_glsl",
         "linux": "./essl_to_glsl_linux",
         "windows": "essl_to_glsl_win.exe"
     }
