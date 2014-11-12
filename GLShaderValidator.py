@@ -92,7 +92,8 @@ class ANGLECommandLine:
                 # error running the essl_to_glsl cmd
 
                 if re.search("permission denied", str(e), flags=re.IGNORECASE):
-                    sublime.error_message("GLShaderValidator: permission denied to use essl_to_glsl command")
+                    basename = os.path.basename( ANGLEPath );
+                    sublime.error_message("GLShaderValidator: permission denied to use " + basename + " command")
                     return []
 
                 # ignore ANGLE's comments
@@ -193,7 +194,7 @@ class GLShaderValidatorCommand(sublime_plugin.EventListener):
 
     def is_valid_file_ending(self, view):
         """ Checks that the file ending will work for ANGLE """
-        isValidFileEnding = re.search('(frag|vert)$', view.file_name()) is not None
+        isValidFileEnding = re.search('(frag|vert|geom)$', view.file_name()) is not None
         return isValidFileEnding
 
     def show_errors(self, view):
@@ -273,4 +274,4 @@ class GLShaderValidatorCommand(sublime_plugin.EventListener):
             self.errors = self.ANGLECLI.validate_contents(view)
             self.show_errors(view)
         else:
-            view.set_status('glshadervalidator', "File name must end in .frag or .vert")
+            view.set_status('glshadervalidator', "File name must end in .frag, .vert or .geom")
