@@ -8,6 +8,13 @@ Win/Linux platforms are the still the same, and don't support greater \#version 
 
 The available toolchain for GLSL could be better.
 
+To install:
+
+1. Install [Package Control](http://wbond.net/sublime_packages/package_control)  
+1. Via Package Control, install a GLSL syntax, like "Open​GL Shading Language (GLSL)"  
+1. cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages  
+1. git clone git@github.com:decamp/GL-Shader-Validator.git "GL Shader Validator"  
+
 -decamp
 
 # GL Shader Validator
